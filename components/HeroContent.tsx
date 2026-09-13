@@ -181,14 +181,6 @@ export const HeroContent = () => {
         </div>
 
       </div>
-
-      {/* Fixed Award Badge */}
-      <div className="fixed right-0 top-1/2 -translate-y-1/2 bg-[#FF3917] text-white flex flex-col items-center py-4 px-2 z-50 rounded-l-sm shadow-md">
-        <span className="font-bold text-sm mb-6">W.</span>
-        <span className="text-[10px] uppercase tracking-widest [writing-mode:vertical-lr] rotate-180 font-mono">
-          Site of the Day
-        </span>
-      </div>
     </section>
   );
 };

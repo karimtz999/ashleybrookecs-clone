@@ -42,15 +42,14 @@ export const Preloader = ({ children }: PreloaderProps) => {
               duration: 0.8,
               ease: [0.76, 0, 0.24, 1], // Custom smooth cubic-bezier curve
             }}
-            className="fixed inset-0 z-[999] bg-[#FF3917] flex items-end justify-end p-8 sm:p-12"
+            className="fixed inset-0 z-999 bg-[#FF3917] flex items-end justify-end p-8 sm:p-12"
           >
             {/* Spinning Loader Indicator in bottom-right corner */}
             <div className="flex items-center gap-3 text-white font-mono text-sm tracking-wider uppercase">
-              <span>Loading</span>
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-                className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+                className="w-17 h-17 border-5 border-white border-t-transparent rounded-full"
               />
             </div>
           </motion.div>
