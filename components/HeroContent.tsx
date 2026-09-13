@@ -1,6 +1,14 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Transition } from 'framer-motion';
 import elfaLogo from '../src/assets/ELFA.png';
+
+const NAV_ITEMS = [
+  { id: "work", label: "Work" },
+  { id: "services", label: "Services" },
+  { id: "about", label: "About" },
+  { id: "contact", label: "Create with us" },
+];
 
 interface AnimatedTextWaveProps {
   text: string;
@@ -58,18 +66,74 @@ const AnimatedTextWave = ({ text }: AnimatedTextWaveProps) => {
 };
 
 export const HeroContent = () => {
+  const [activeId, setActiveId] = useState<string | null>(null);
+
   return (
     <section className="relative w-full max-w-7xl mx-auto px-6 md:px-8 pt-8 pb-12">
-      <div className="flex flex-col items-start min-w-[120px] mb-24 md:mb-32 pointer-events-auto">
-        <img
-          src={elfaLogo}
-          alt="Elfa Logo"
-          className="h-20 sm:h-32 w-auto object-contain"
-        />
-        <div className="flex justify-between items-center w-full mt-2 text-[rgb(255,57,23)] text-[10px] sm:text-xs font-['Press_Start_2P'] tracking-widest uppercase">
-          <span>CREATIVE</span>
-          <span>STUDIO</span>
+      <div className="flex items-start justify-between gap-8 mb-24 md:mb-32 pointer-events-auto">
+        <div className="flex flex-col items-start min-w-30">
+          <img
+            src={elfaLogo}
+            alt="Elfa Logo"
+            className="h-30 sm:h-42 w-auto object-contain"
+          />
+          <div className="flex justify-between items-center w-full mt-2 text-[rgb(255,57,23)] text-[10px] sm:text-xs font-['Press_Start_2P'] tracking-widest uppercase">
+            <span>CREATIVE</span>
+            <span>STUDIO</span>
+          </div>
         </div>
+
+        <nav className="flex flex-col items-start gap-1 text-lg sm:text-2xl font-['Press_Start_2P'] tracking-tight pt-1">
+          {NAV_ITEMS.map((item) => {
+            const isActive = activeId === item.id;
+            const letters = item.label.split("");
+
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  setActiveId((prev) => (prev === item.id ? null : item.id));
+                }}
+                className="relative overflow-hidden block cursor-pointer py-1 select-none"
+              >
+                <motion.div initial="initial" whileHover="hover" className="relative block">
+                  <div className="flex whitespace-nowrap">
+                    {letters.map((char, index) => (
+                      <motion.span
+                        key={index}
+                        variants={{
+                          initial: { y: 0, opacity: 1, color: isActive ? "#FF3917" : "#000000" },
+                          hover: { y: -28, opacity: 0, color: "#FF3917" },
+                        }}
+                        transition={{ duration: 0.2, delay: index * 0.03, ease: "easeInOut" }}
+                        className="inline-block"
+                      >
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                  </div>
+                  <div className="absolute inset-0 flex whitespace-nowrap">
+                    {letters.map((char, index) => (
+                      <motion.span
+                        key={index}
+                        variants={{
+                          initial: { y: 28, opacity: 0, color: "#FF3917" },
+                          hover: { y: 0, opacity: 1, color: "#FF3917" },
+                        }}
+                        transition={{ duration: 0.2, delay: index * 0.03, ease: "easeInOut" }}
+                        className="inline-block"
+                      >
+                        {char === " " ? "\u00A0" : char}
+                      </motion.span>
+                    ))}
+                  </div>
+                </motion.div>
+              </a>
+            );
+          })}
+        </nav>
       </div>
 
       {/* 12-Column Grid Layout */}

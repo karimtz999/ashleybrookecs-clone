@@ -31,8 +31,7 @@ export const Navbar = () => {
                 e.preventDefault();
                 handleClick(item.id);
               }}
-              className="relative overflow-hidden block cursor-pointer py-1 select-none"
-            >
+              className="relative overflow-hidden block cursor-pointer py-1 select-none">
               <motion.div
                 initial="initial"
                 whileHover="hover"
